@@ -1,0 +1,81 @@
+" =Vundle=
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'scrooloose/syntastic' " Syntax checker
+Plugin 'AussieGuy0/jcommenter.vim' " JavaDoc Generator
+Plugin 'altercation/vim-colors-solarized' " Solarized Color Scheme
+Plugin 'amperser/proselint' " Prose Linter
+Plugin 'rstacruz/vim-closer' " Bracket Closer
+Plugin 'AlessandroYorba/Alduin' " Alduin colorscheme
+Plugin 'sheerun/vim-polyglot' " Multi-language support
+Plugin 'chriskempson/base16-vim' " Base-16 colorschemes
+Plugin 'airblade/vim-gitgutter' 
+Plugin 'mhinz/vim-startify' 
+Plugin 'junegunn/goyo.vim'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+
+" =UI=
+set number " Shows line numbers
+set cursorline " highlights current line
+set showmatch " highlights matching brackets
+set wildmenu " visual autocomplete for command menu
+set title " Shows title of file in top bar
+
+" =Searching=
+set incsearch " Search as characters are entered
+set hlsearch " highlight matches
+
+" =Move vertically by visual line=
+nnoremap j gj
+nnoremap k gk
+
+let mapleader="," " leader is comma
+
+" =Spaces and Tabs=
+set tabstop=4 " number of visual spaces per TAB
+set softtabstop=4 " number of spaces in TAB when editing
+set expandtab " tabs are spaces
+set autoindent
+set cindent
+set shiftwidth=4 " sets indentation to 4 spaces
+
+" =Backups=
+set backup
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set backupskip=/tmp/*,/private/tmp/*
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set writebackup
+
+" =Syntastic=
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" =jcommenter=
+map <leader>j :call JCommentWriter()<ENTER>
+let b:jcommenter_move_cursor = 1 " Moves cursor when JDoc is generated
+let b:jcommenter_autostart_insert_mode = 1 " Changes to insert mode when JDoc generated
+
+" =Colors=
+au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown "sets md files as markdown
+syntax enable " Enables syntax highlighting
+set t_Co=16 " Neccesary for correct colours in terminal for base 16
+let base16colorspace=256
+set background=dark
+"let g:alduin_Shout_Aura_Whisper = 1 " Highlight matching bracket
+colorscheme base16-twilight
