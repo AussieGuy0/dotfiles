@@ -18,6 +18,7 @@ Plugin 'chriskempson/base16-vim' " Base-16 colorschemes
 Plugin 'airblade/vim-gitgutter' 
 Plugin 'mhinz/vim-startify' 
 Plugin 'junegunn/goyo.vim'
+Plugin 'nelstrom/vim-markdown-folding' "auto folding of markdown documents
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -39,7 +40,17 @@ set hlsearch " highlight matches
 nnoremap j gj
 nnoremap k gk
 
-let mapleader="," " leader is comma
+nnoremap <leader>ev :split $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" Disable arrow keys in normal mode
+nnoremap <Right> <nop>
+nnoremap <Left> <nop>
+nnoremap <Up> <nop>
+nnoremap <Down> <nop>
+
+" leader is comma
+let mapleader = "," 
 
 " =Spaces and Tabs=
 set tabstop=4 " number of visual spaces per TAB
