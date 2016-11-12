@@ -37,10 +37,10 @@ bindsym $mod+d exec dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -61,10 +61,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+Shift+h split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+Shitft+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -174,8 +174,11 @@ bar {
 
 bindsym $mod+Shift+x exec i3lock
 
-exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/google-chrome'
+exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/firefox'
 exec --no-startup-id i3-msg 'workspace 2; exec /usr/bin/slack'
+exec --no-startup-id i3-msg 'workspace 2; exec /usr/bin/gnome-terminal -e vim Documents/Google\ Drive/Notes/GTD.md'
 exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/volumeicon'
 exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/nm-applet'
-new_window none
+exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/redshift'
+exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/gnome-terminal -e insync start'
+new_window pixel 1

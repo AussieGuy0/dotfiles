@@ -8,17 +8,19 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/syntastic' " Syntax checker
-Plugin 'AussieGuy0/jcommenter.vim' " JavaDoc Generator
 Plugin 'altercation/vim-colors-solarized' " Solarized Color Scheme
-Plugin 'amperser/proselint' " Prose Linter
 Plugin 'rstacruz/vim-closer' " Bracket Closer
-Plugin 'AlessandroYorba/Alduin' " Alduin colorscheme
 Plugin 'sheerun/vim-polyglot' " Multi-language support
 Plugin 'chriskempson/base16-vim' " Base-16 colorschemes
-Plugin 'airblade/vim-gitgutter' 
-Plugin 'mhinz/vim-startify' 
-Plugin 'junegunn/goyo.vim'
+Plugin 'airblade/vim-gitgutter'  " Visual representation of changed lines
+Plugin 'mhinz/vim-startify' " Custom start screen
+Plugin 'junegunn/goyo.vim' " No distraction mode
 Plugin 'nelstrom/vim-markdown-folding' "auto folding of markdown documents
+
+"Plugin 'amperser/proselint' " Prose Linter
+"Plugin 'AlessandroYorba/Alduin' " Alduin colorscheme
+"Plugin 'mmai/vim-markdown-wiki'
+"Plugin 'AussieGuy0/jcommenter.vim' " JavaDoc Generator
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
