@@ -16,11 +16,8 @@ Plugin 'airblade/vim-gitgutter'  " Visual representation of changed lines
 Plugin 'mhinz/vim-startify' " Custom start screen
 Plugin 'junegunn/goyo.vim' " No distraction mode
 Plugin 'nelstrom/vim-markdown-folding' "auto folding of markdown documents
+Plugin 'vimwiki/vimwiki' " wiki
 
-"Plugin 'amperser/proselint' " Prose Linter
-"Plugin 'AlessandroYorba/Alduin' " Alduin colorscheme
-"Plugin 'mmai/vim-markdown-wiki'
-"Plugin 'AussieGuy0/jcommenter.vim' " JavaDoc Generator
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -79,10 +76,8 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-" =jcommenter=
-map <leader>j :call JCommentWriter()<ENTER>
-let b:jcommenter_move_cursor = 1 " Moves cursor when JDoc is generated
-let b:jcommenter_autostart_insert_mode = 1 " Changes to insert mode when JDoc generated
+" =Markdown=
+let g:vimwiki_list = [{'path': '~/Drive/Notes/wiki', 'syntax': 'markdown', 'ext': '.md'}]
 
 " =Colors=
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown "sets md files as markdown
@@ -90,5 +85,4 @@ syntax enable " Enables syntax highlighting
 set t_Co=16 " Neccesary for correct colours in terminal for base 16
 let base16colorspace=256
 set background=dark
-"let g:alduin_Shout_Aura_Whisper = 1 " Highlight matching bracket
-colorscheme base16-twilight
+colorscheme solarized
