@@ -23,6 +23,15 @@ Plugin 'vimwiki/vimwiki' " wiki
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+" =General=
+let mapleader = "," 
+let g:mapleader = ","
+
+" Sets how many lines of history VIM has to remember
+set history=500 
+
+" :W writes in sudo mode, useful for when editing protected file
+command W w !sudo tee % > /dev/null 
 
 " =UI=
 set number " Shows line numbers
@@ -30,6 +39,7 @@ set cursorline " highlights current line
 set showmatch " highlights matching brackets
 set wildmenu " visual autocomplete for command menu
 set title " Shows title of file in top bar
+set ruler " Show linenumber, char pos at bottom
 
 " =Searching=
 set incsearch " Search as characters are entered
@@ -48,16 +58,22 @@ nnoremap <Left> <nop>
 nnoremap <Up> <nop>
 nnoremap <Down> <nop>
 
-" leader is comma
-let mapleader = "," 
 
 " =Spaces and Tabs=
 set tabstop=4 " number of visual spaces per TAB
 set softtabstop=4 " number of spaces in TAB when editing
 set expandtab " tabs are spaces
-set autoindent
-set cindent
 set shiftwidth=4 " sets indentation to 4 spaces
+
+set autoindent
+set smartindent
+
+" =Windows=
+" Move around windoes with ctrl + direction 
+map <C-j> <C-W>j 
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
 
 " =Backups=
 set backup
@@ -65,6 +81,8 @@ set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set backupskip=/tmp/*,/private/tmp/*
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set writebackup
+
+" == PLUGIN & COLOURS ==
 
 " =Syntastic=
 set statusline+=%#warningmsg#
@@ -75,6 +93,8 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+autocmd VimLeave * :mksession! ~/.vim/sessions/last.vim
 
 " =Markdown=
 let g:vimwiki_list = [{'path': '~/Drive/Notes/wiki', 'syntax': 'markdown', 'ext': '.md'}]
