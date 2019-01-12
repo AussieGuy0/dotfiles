@@ -8,7 +8,7 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files="gitconfig vimrc"    # list of files/folders to symlink in homedir
+files="gitconfig vimrc npmrc"    # list of files/folders to symlink in homedir
 
 ##########
 
@@ -26,7 +26,7 @@ echo "done"
 for file in $files; do
     #check, that file is not sym-link to our file:
     sym_path=$(eval "readlink ~/.$file")
-    subpath=$(echo $dir)
+    subpath=$dir
 
     if [[ -n "$sym_path"  && $sym_path == "$subpath"* ]] 
     then
@@ -36,10 +36,10 @@ for file in $files; do
     if [[ -e ~/.$file ]]
     then
         echo "Moving .$file to $olddir"
-        mv ~/.$file ~/dotfiles_old/
+        mv ~/."$file" ~/dotfiles_old/
     fi
     echo "Creating symlink to .$file in home directory."
-    ln -s $dir/$file ~/.$file
+    ln -s "$dir/.$file" ~/."$file"
 done
 
 
