@@ -6,7 +6,11 @@
 
 ########## Variables
 
-dir=~/dotfiles                    # dotfiles directory
+currdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+cd "$currDir"
+cd ..
+echo $(pwd)
+dir=$(pwd)
 olddir=~/dotfiles_old             # old dotfiles backup directory
 files="gitconfig vimrc npmrc"    # list of files/folders to symlink in homedir
 
@@ -19,7 +23,7 @@ echo "done"
 
 # change to the dotfiles directory
 echo -n "Changing to the $dir directory ..."
-cd $dir || return
+cd "$dir" || return
 echo "done"
 
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks from the homedir to any files in the ~/dotfiles directory specified in $files
