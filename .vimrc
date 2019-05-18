@@ -8,14 +8,12 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/syntastic' " Syntax checker
-Plugin 'altercation/vim-colors-solarized' " Solarized Color Scheme
+Plugin 'lifepillar/vim-solarized8' " Solarized Color Scheme
 Plugin 'rstacruz/vim-closer' " Bracket Closer
 Plugin 'sheerun/vim-polyglot' " Multi-language support
-Plugin 'chriskempson/base16-vim' " Base-16 colorschemes
 Plugin 'airblade/vim-gitgutter'  " Visual representation of changed lines
 Plugin 'mhinz/vim-startify' " Custom start screen
 Plugin 'junegunn/goyo.vim' " No distraction mode
-Plugin 'nelstrom/vim-markdown-folding' "auto folding of markdown documents
 Plugin 'vimwiki/vimwiki' " wiki
 
 
@@ -69,7 +67,7 @@ set autoindent
 set smartindent
 
 " =Windows=
-" Move around windoes with ctrl + direction 
+" Move around windows with ctrl + direction 
 map <C-j> <C-W>j 
 map <C-k> <C-W>k
 map <C-h> <C-W>h
@@ -97,12 +95,12 @@ let g:syntastic_check_on_wq = 0
 autocmd VimLeave * :mksession! ~/.vim/sessions/last.vim
 
 " =Markdown=
-let g:vimwiki_list = [{'path': '~/Drive/Notes/wiki', 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [{'path': '~/Drive/Notes', 'syntax': 'markdown', 'ext': '.md'}]
+au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown "sets md files as markdown
+au BufReadPost,BufNewFile *.md,*.txt,*.tex set tw=80
 
 " =Colors=
-au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown "sets md files as markdown
 syntax enable " Enables syntax highlighting
-set t_Co=16 " Neccesary for correct colours in terminal for base 16
-let base16colorspace=256
 set background=dark
-colorscheme solarized
+set termguicolors
+colorscheme solarized8
