@@ -7,11 +7,10 @@
 ########## Variables
 
 currdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-cd "$currdir" || exit
-cd .. || exit
+cd "$currdir"/.. || exit
 dir=$(pwd)
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files="gitconfig vimrc npmrc"    # list of files/folders to symlink in homedir
+files="gitconfig vimrc npmrc bash_aliases bash_profile"    # list of files/folders to symlink in homedir
 
 ##########
 
