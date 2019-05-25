@@ -5,6 +5,7 @@ openjdk-11-jdk
 openjdk-11-doc
 firefox
 chromium-browser
+qutebrowser
 curl
 i3
 i3blocks
@@ -12,3 +13,4 @@ git
 vim
 shellcheck
 flake8
+flameshot

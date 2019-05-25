@@ -1,21 +1,39 @@
 #!/bin/bash
+set -e
 DEVPATH="$HOME/dev"
 IDEDIR="$DEVPATH/ide" 
+
+TOOLBOX="jetbrains-toolbox-1.14.5179.tar.gz"
+NODE_VERSION=12
+
 
 sudo apt update
 sudo apt -y upgrade 
 
 cat packages.txt | xargs sudo apt -y install
 
-sudo snap install node --classic --channel=10
+sudo snap install node --classic --channel=$NODE_VERSION
 sudo snap install spotify
 
+# Setup dotfiles
 git clone https://github.com/AussieGuy0/dotfiles.git "$DEVPATH"
-cp "$DEVPATH/dotfiles/.vimrc" "$HOME"
+sh "$DEVPATH"/dotfiles/scripts/install-dotfiles.sh
 
+# Setup vim
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
 
-# Downloads IntelliJ
-wget -P "$IDEDIR" https://download.jetbrains.com/idea/ideaIU-2018.3.3.tar.gz
-tar -xvzf "$IDEDIR/ideaIU-2018.3.3.tar.gz"
+
+# Setup ssh key
+echo "Would you like to generate a SSH key? (Y/N)"
+read -r ANSWER
+if [ "$ANSWER" = "Y" ]
+then
+    ssh-keygen -t rsa -b 4096
+fi
+exit
+
+# Download and run Jetbrains Toolbox
+wget -P /tmp https://download.jetbrains.com/toolbox/$TOOLBOX
+tar -xvzf /tmp/"$TOOLBOX" -C "$IDEDIR/"
+sh "$IDEDIR/$TOOLBOX"/jetbrans-toolbox
