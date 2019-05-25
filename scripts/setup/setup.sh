@@ -31,7 +31,6 @@ if [ "$ANSWER" = "Y" ]
 then
     ssh-keygen -t rsa -b 4096
 fi
-exit
 
 # Download and run Jetbrains Toolbox
 wget -P /tmp https://download.jetbrains.com/toolbox/$TOOLBOX
