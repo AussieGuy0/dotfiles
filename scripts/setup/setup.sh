@@ -6,7 +6,6 @@ IDEDIR="$DEVPATH/ide"
 TOOLBOX="jetbrains-toolbox-1.14.5179.tar.gz"
 NODE_VERSION=12
 
-
 sudo apt update
 sudo apt -y upgrade 
 
@@ -16,7 +15,7 @@ sudo snap install node --classic --channel=$NODE_VERSION
 sudo snap install spotify
 
 # Setup dotfiles
-git clone https://github.com/AussieGuy0/dotfiles.git "$DEVPATH"
+git clone https://github.com/AussieGuy0/dotfiles.git "$DEVPATH"/dotfiles
 sh "$DEVPATH"/dotfiles/scripts/install-dotfiles.sh
 
 # Setup vim
