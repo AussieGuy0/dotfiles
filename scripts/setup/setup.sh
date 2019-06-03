@@ -31,6 +31,10 @@ then
     ssh-keygen -t rsa -b 4096
 fi
 
+# Download and install insync
+wget -P /tmp http://s.insynchq.com/builds/insync_1.5.7.37371-artful_amd64.deb
+sudo dpkg -i /tmp/insync_1.5.7.37371-artful_amd64.deb
+
 # Download and run Jetbrains Toolbox
 wget -P /tmp https://download.jetbrains.com/toolbox/$TOOLBOX
 tar -xvzf /tmp/"$TOOLBOX" -C "$IDEDIR/"
