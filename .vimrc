@@ -94,8 +94,17 @@ let g:syntastic_check_on_wq = 0
 
 autocmd VimLeave * :mksession! ~/.vim/sessions/last.vim
 
-" =Markdown=
+" =VimWiki=
 let g:vimwiki_list = [{'path': '~/Drive/Notes', 'syntax': 'markdown', 'ext': '.md'}]
+
+command! Diary VimwikiDiaryIndex
+augroup vimwikigroup
+    autocmd!
+    autocmd BufRead,BufNewFile diary.wiki VimwikiDiaryGenerateLinks
+augroup end
+nnoremap <leader>wi :Diary<cr>
+
+" =Markdown=
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown "sets md files as markdown
 au BufReadPost,BufNewFile *.md,*.txt,*.tex set tw=80
 
