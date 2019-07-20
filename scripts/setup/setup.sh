@@ -13,6 +13,7 @@ cat packages.txt | xargs sudo apt -y install
 
 sudo snap install node --classic --channel=$NODE_VERSION
 sudo snap install spotify
+sudo snap install code
 
 # Setup dotfiles
 git clone https://github.com/AussieGuy0/dotfiles.git "$DEVPATH"/dotfiles
