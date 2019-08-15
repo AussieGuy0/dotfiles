@@ -100,9 +100,8 @@ let g:vimwiki_list = [{'path': '~/Drive/Notes', 'syntax': 'markdown', 'ext': '.m
 command! Diary VimwikiDiaryIndex
 augroup vimwikigroup
     autocmd!
-    autocmd BufRead,BufNewFile diary.wiki VimwikiDiaryGenerateLinks
+    autocmd BufRead,BufNewFile diary.md VimwikiDiaryGenerateLinks
 augroup end
-nnoremap <leader>wi :Diary<cr>
 
 " =Markdown=
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown "sets md files as markdown
