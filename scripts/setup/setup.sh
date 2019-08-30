@@ -14,10 +14,14 @@ cat packages.txt | xargs sudo apt -y install
 sudo snap install node --classic --channel=$NODE_VERSION
 sudo snap install spotify
 sudo snap install code
+sudo snap install docker
 
 # Setup dotfiles
+CURR_DIR=$(pwd)
 git clone https://github.com/AussieGuy0/dotfiles.git "$DEVPATH"/dotfiles
-sh "$DEVPATH"/dotfiles/scripts/install-dotfiles.sh
+cd "$DEVPATH"/dotfiles/scripts
+./install-dotfiles.sh
+cd "$CURR_DIR"
 
 # Setup vim
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -33,8 +37,13 @@ then
 fi
 
 # Download and install insync
-wget -P /tmp http://s.insynchq.com/builds/insync_1.5.7.37371-artful_amd64.deb
-sudo dpkg -i /tmp/insync_1.5.7.37371-artful_amd64.deb
+echo "Would you like to install insync? (Y/N)"
+read -r ANSWER
+if [ "$ANSWER" = "Y" ]
+then
+    wget -P /tmp http://s.insynchq.com/builds/insync_1.5.7.37371-artful_amd64.deb
+    sudo dpkg -i /tmp/insync_1.5.7.37371-artful_amd64.deb
+fi
 
 # Download and run Jetbrains Toolbox
 wget -P /tmp https://download.jetbrains.com/toolbox/$TOOLBOX
