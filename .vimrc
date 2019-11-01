@@ -7,7 +7,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'scrooloose/syntastic' " Syntax checker
+Plugin 'dense-analysis/ale' " Syntax checker
 Plugin 'lifepillar/vim-solarized8' " Solarized Color Scheme
 Plugin 'rstacruz/vim-closer' " Bracket Closer
 Plugin 'sheerun/vim-polyglot' " Multi-language support
@@ -16,20 +16,28 @@ Plugin 'mhinz/vim-startify' " Custom start screen
 Plugin 'junegunn/goyo.vim' " No distraction mode
 Plugin 'vimwiki/vimwiki' " wiki
 
+Plugin 'vim-airline/vim-airline' " Better status bar
+Plugin 'vim-airline/vim-airline-themes'
+
+" Clojure
+Plugin 'tpope/vim-salve'
+Plugin 'tpope/vim-projectionist'
+Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-fireplace'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 
 " =General=
-let mapleader = "," 
+let mapleader = ","
 let g:mapleader = ","
 
 " Sets how many lines of history VIM has to remember
-set history=500 
+set history=500
 
 " :W writes in sudo mode, useful for when editing protected file
-command W w !sudo tee % > /dev/null 
+command W w !sudo tee % > /dev/null
 
 " =UI=
 set number " Shows line numbers
@@ -67,8 +75,8 @@ set autoindent
 set smartindent
 
 " =Windows=
-" Move around windows with ctrl + direction 
-map <C-j> <C-W>j 
+" Move around windows with ctrl + direction
+map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
@@ -82,15 +90,13 @@ set writebackup
 
 " == PLUGIN & COLOURS ==
 
-" =Syntastic=
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" =Airline=
+let g:airline_theme='solarized'
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" =Ale=
+let g:ale_open_list = 1
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 0
 
 autocmd VimLeave * :mksession! ~/.vim/sessions/last.vim
 
