@@ -34,10 +34,7 @@ let mapleader = ","
 let g:mapleader = ","
 
 " Sets how many lines of history VIM has to remember
-set history=500
-
-" :W writes in sudo mode, useful for when editing protected file
-command W w !sudo tee % > /dev/null
+set history=1000
 
 " =UI=
 set number " Shows line numbers
@@ -50,7 +47,37 @@ set ruler " Show linenumber, char pos at bottom
 " =Searching=
 set incsearch " Search as characters are entered
 set hlsearch " highlight matches
+set ignorecase
+set smartcase
 
+" =Spaces and Tabs=
+set tabstop=4 " number of visual spaces per TAB
+set softtabstop=4 " number of spaces in TAB when editing
+set expandtab " tabs are spaces
+set shiftwidth=4 " sets indentation to 4 spaces
+
+set autoindent
+set smartindent
+set smarttab
+
+set autoread
+
+" =Backups=
+set backup
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set backupskip=/tmp/*,/private/tmp/*
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set writebackup
+
+" =Windows=
+" Move around windows with ctrl + direction
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" :W writes in sudo mode, useful for when editing protected file
+command W w !sudo tee % > /dev/null
 " =Move vertically by visual line=
 nnoremap j gj
 nnoremap k gk
@@ -64,30 +91,6 @@ nnoremap <Left> <nop>
 nnoremap <Up> <nop>
 nnoremap <Down> <nop>
 
-
-" =Spaces and Tabs=
-set tabstop=4 " number of visual spaces per TAB
-set softtabstop=4 " number of spaces in TAB when editing
-set expandtab " tabs are spaces
-set shiftwidth=4 " sets indentation to 4 spaces
-
-set autoindent
-set smartindent
-
-" =Windows=
-" Move around windows with ctrl + direction
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
-
-" =Backups=
-set backup
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set backupskip=/tmp/*,/private/tmp/*
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set writebackup
-
 " == PLUGIN & COLOURS ==
 
 " =Airline=
@@ -98,8 +101,6 @@ let g:ale_open_list = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
 
-autocmd VimLeave * :mksession! ~/.vim/sessions/last.vim
-
 " =VimWiki=
 let g:vimwiki_list = [{'path': '~/Drive/Notes', 'syntax': 'markdown', 'ext': '.md'}]
 
@@ -107,11 +108,19 @@ command! Diary VimwikiDiaryIndex
 augroup vimwikigroup
     autocmd!
     autocmd BufRead,BufNewFile diary.md VimwikiDiaryGenerateLinks
+    au BufNewFile ~/Drive/Notes/diary/*.md :silent 0r !~/.vim/bin/generate-vimwiki-diary-template.py '%'
 augroup end
 
 " =Markdown=
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown "sets md files as markdown
 au BufReadPost,BufNewFile *.md,*.txt,*.tex set tw=80
+
+" =Templates=
+augroup templates
+  au!
+  " read in templates files
+  autocmd BufNewFile *.* silent! execute '0r ~/.vim/templates/skeleton.'.expand("<afile>:e")
+augroup END
 
 " =Colors=
 syntax enable " Enables syntax highlighting
