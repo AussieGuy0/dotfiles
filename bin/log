@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+
+vim -c "call vimwiki#diary#make_note(v:count1)" + -c "r !date +'\%n\#\# \%H:\%M \%n'"
+
