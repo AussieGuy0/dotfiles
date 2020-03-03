@@ -1,0 +1,9 @@
+#!/bin/bash
+set -e
+
+currdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+cd "$currdir"/.. || exit
+
+git pull
+"$currdir"/install-dotfiles.sh
+

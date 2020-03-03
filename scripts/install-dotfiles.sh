@@ -10,7 +10,7 @@ currdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "$currdir"/.. || exit
 dir=$(pwd)
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files="gitconfig vimrc vim/bin vim/templates vim/ftplugin npmrc bash_aliases bash_profile tmux.conf bin"    # list of files/folders to symlink in homedir
+files=".gitconfig .vimrc .vim/bin .vim/templates .vim/ftplugin .npmrc .bash_aliases .bash_profile .tmux.conf bin"    # list of files/folders to symlink in homedir
 
 ##########
 
@@ -27,7 +27,7 @@ echo "done"
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks from the homedir to any files in the ~/dotfiles directory specified in $files
 for file in $files; do
     #check, that file is not sym-link to our file:
-    sym_path=$(eval "readlink ~/.$file")
+    sym_path=$(eval "readlink ~/$file")
     subpath=$dir
 
     if [[ -n "$sym_path"  && $sym_path == "$subpath"* ]] 
@@ -35,13 +35,13 @@ for file in $files; do
         echo "$file already linked -> skip"
         continue
     fi
-    if [[ -e ~/.$file ]]
+    if [[ -e ~/$file ]]
     then
-        echo "Moving .$file to $olddir"
-        mv ~/."$file" ~/dotfiles_old/
+        echo "Moving $file to $olddir"
+        mv ~/"$file" ~/dotfiles_old/
     fi
-    echo "Creating symlink to .$file in home directory."
-    ln -s "$dir/.$file" ~/."$file"
+    echo "Creating symlink to $file in home directory."
+    ln -s "$dir/$file" ~/"$file"
 done
 
 
