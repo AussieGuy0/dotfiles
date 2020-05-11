@@ -1,10 +1,15 @@
-#!/bin/bash
-set -e
-DEVPATH="$HOME/dev"
-IDEDIR="$DEVPATH/ide" 
+#!/usr/bin/env bash
+set -eu
 
-TOOLBOX="jetbrains-toolbox-1.16.6319.tar.gz"
-NODE_VERSION=12
+CURR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+cd "$CURR_DIR"
+
+DEVPATH="$HOME/dev"
+TOOLDIR="$DEVPATH/tools"
+IDEDIR="$DEVPATH/ide" 
+TOOLBOX="jetbrains-toolbox-1.17.6856.tar.gz"
+
+NVM_VERSION="0.35.3"
 
 echo "Updating system"
 sudo apt update
@@ -13,14 +18,12 @@ sudo apt -y upgrade
 echo "Installing packages"
 cat packages.txt | xargs sudo apt -y install
 
-sudo snap install node --classic --channel=$NODE_VERSION
 sudo snap install spotify
-sudo snap install code
+sudo snap install code --classic
 sudo snap install docker
 
 # Setup dotfiles
 echo "Setting up dotfiles"
-CURR_DIR=$(pwd)
 git clone https://github.com/AussieGuy0/dotfiles.git "$DEVPATH"/dotfiles
 cd "$DEVPATH"/dotfiles/scripts
 ./install-dotfiles.sh
@@ -28,8 +31,14 @@ cd "$CURR_DIR"
 
 # Setup vim
 echo "Setting up vim"
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
+
+# Setup nvm
+cd "$TOOLDIR"
+git clone https://github.com/nvm-sh/nvm.git nvm
+cd nvm
+git checkout v"$NVM_VERSION"
+cd "$CURR_DIR"
 
 
 # Setup ssh key
