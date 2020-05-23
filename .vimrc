@@ -63,11 +63,10 @@ set smarttab
 set autoread
 
 " =Backups=
-set backup
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set backupskip=/tmp/*,/private/tmp/*
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set writebackup
+set nobackup
+set noswapfile
+set undodir=~/.vim/undodir
+set undofile
 
 " =Windows=
 " Move around windows with ctrl + direction
