@@ -15,6 +15,7 @@ Plugin 'airblade/vim-gitgutter'  " Visual representation of changed lines
 Plugin 'mhinz/vim-startify' " Custom start screen
 Plugin 'junegunn/goyo.vim' " No distraction mode
 Plugin 'vimwiki/vimwiki' " wiki
+Plugin 'ycm-core/YouCompleteMe'
 
 Plugin 'vim-airline/vim-airline' " Better status bar
 Plugin 'vim-airline/vim-airline-themes'
@@ -70,10 +71,10 @@ set undofile
 
 " =Windows=
 " Move around windows with ctrl + direction
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
 
 " :W writes in sudo mode, useful for when editing protected file
 command W w !sudo tee % > /dev/null
@@ -84,11 +85,9 @@ nnoremap k gk
 nnoremap <leader>ev :split $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
-" Disable arrow keys in normal mode
-nnoremap <Right> <nop>
-nnoremap <Left> <nop>
-nnoremap <Up> <nop>
-nnoremap <Down> <nop>
+" Who needs NERDTree? 
+let g:netrw_banner = 0
+nnoremap <leader>pv :30Lex<CR>
 
 " == PLUGIN & COLOURS ==
 

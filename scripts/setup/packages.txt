@@ -8,12 +8,14 @@ firefox
 chromium-browser
 qutebrowser
 curl
-i3
-i3blocks
 git
 vim
 shellcheck
 flake8
 flameshot
 xclip
+clipit
 tree
+cmake
+python-dev
+python3-dev
