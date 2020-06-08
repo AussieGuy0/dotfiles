@@ -85,7 +85,11 @@ nnoremap k gk
 nnoremap <leader>ev :split $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
-" Who needs NERDTree? 
+nnoremap <silent> <leader>gd :YcmCompleter GoTo<CR>
+nnoremap <silent> <leader>gf :YcmCompleter FixIt<CR>
+
+
+" Who needs NERDTree?
 let g:netrw_banner = 0
 nnoremap <leader>pv :30Lex<CR>
 
@@ -101,6 +105,7 @@ let g:ale_lint_on_text_changed = 0
 
 " =VimWiki=
 let g:vimwiki_list = [{'path': '~/Drive/Notes', 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_global_ext=0
 
 command! Diary VimwikiDiaryIndex
 augroup vimwikigroup
@@ -109,9 +114,7 @@ augroup vimwikigroup
     au BufNewFile ~/Drive/Notes/diary/*.md :silent 0r !~/.vim/bin/generate-vimwiki-diary-template.py '%'
 augroup end
 
-" =Markdown=
-au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown "sets md files as markdown
-au BufReadPost,BufNewFile *.md,*.txt,*.tex set tw=80
+au BufReadPost,BufNewFile *.txt,*.tex set tw=80
 
 " =Templates=
 augroup templates
