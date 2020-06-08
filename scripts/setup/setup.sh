@@ -33,7 +33,7 @@ cd "$CURR_DIR"
 echo "Setting up vim"
 vim +PluginInstall +qall
 cd ~/.vim/bundle/YouCompleteMe
-python3 install.py --ts-completer
+python3 install.py --ts-completer --go-completer
 cd "$CURR_DIR"
 
 # Setup nvm
