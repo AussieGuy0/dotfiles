@@ -1,34 +1,28 @@
-" =Vundle=
 set nocompatible              " be iMproved, required
-filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'dense-analysis/ale' " Syntax checker
-Plugin 'lifepillar/vim-solarized8' " Solarized Color Scheme
-Plugin 'rstacruz/vim-closer' " Bracket Closer
-Plugin 'sheerun/vim-polyglot' " Multi-language support
-Plugin 'airblade/vim-gitgutter'  " Visual representation of changed lines
-Plugin 'mhinz/vim-startify' " Custom start screen
-Plugin 'junegunn/goyo.vim' " No distraction mode
-Plugin 'vimwiki/vimwiki' " wiki
-Plugin 'ycm-core/YouCompleteMe'
+call plug#begin('~/.vim/plugged')
 
-Plugin 'vim-airline/vim-airline' " Better status bar
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'dense-analysis/ale' " Syntax checker
+Plug 'lifepillar/vim-solarized8' " Solarized Color Scheme
+Plug 'rstacruz/vim-closer' " Bracket Closer
+Plug 'sheerun/vim-polyglot' " Multi-language support
+Plug 'airblade/vim-gitgutter'  " Visual representation of changed lines
+Plug 'mhinz/vim-startify' " Custom start screen
+Plug 'junegunn/goyo.vim' " No distraction mode
+Plug 'vimwiki/vimwiki' " wiki
+Plug 'ycm-core/YouCompleteMe'
+
+Plug 'vim-airline/vim-airline' " Better status bar
+Plug 'vim-airline/vim-airline-themes'
 
 " Clojure
-Plugin 'tpope/vim-salve'
-Plugin 'tpope/vim-projectionist'
-Plugin 'tpope/vim-dispatch'
-Plugin 'tpope/vim-fireplace'
+Plug 'tpope/vim-salve'
+Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-fireplace'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()
 
 " =General=
 let mapleader = ","

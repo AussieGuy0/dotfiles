@@ -25,8 +25,15 @@ sudo snap install docker
 
 # Setup vim
 echo "Setting up vim"
-vim +PluginInstall +qall
-cd ~/.vim/bundle/YouCompleteMe
+
+# https://github.com/junegunn/vim-plug
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+vim +PlugInstall
+
+cd ~/.vim/plugged/YouCompleteMe
 python3 install.py --ts-completer --go-completer
 cd "$CURR_DIR"
 
