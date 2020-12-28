@@ -10,7 +10,7 @@ git init
 git remote add origin git@github.com:AussieGuy0/dotfiles.git
 git fetch
 git checkout -f master
-./setup/setup.sh
+./scripts/setup.sh
 ```
 
 ## Adding new files
