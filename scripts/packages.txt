@@ -12,6 +12,8 @@ qutebrowser
 curl
 git
 vim
+neovim
+python3-neovim
 shellcheck
 flake8
 flameshot

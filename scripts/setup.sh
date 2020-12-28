@@ -7,9 +7,10 @@ cd "$CURR_DIR"
 DEVPATH="$HOME/dev"
 TOOLDIR="$DEVPATH/tools"
 IDEDIR="$DEVPATH/ide" 
-TOOLBOX="jetbrains-toolbox-1.17.6856.tar.gz"
 
-NVM_VERSION="0.35.3"
+TOOLBOX="jetbrains-toolbox-1.19.7784.tar.gz"
+INSYNC="insync_3.3.4.40916-focal_amd64.deb"
+NVM_VERSION="0.37.2"
 
 echo "Updating system"
 sudo apt update
@@ -21,13 +22,6 @@ cat packages.txt | xargs sudo apt -y install
 sudo snap install spotify
 sudo snap install code --classic
 sudo snap install docker
-
-# Setup dotfiles
-echo "Setting up dotfiles"
-git clone https://github.com/AussieGuy0/dotfiles.git "$DEVPATH"/dotfiles
-cd "$DEVPATH"/dotfiles/scripts
-./install-dotfiles.sh
-cd "$CURR_DIR"
 
 # Setup vim
 echo "Setting up vim"
@@ -57,8 +51,8 @@ echo "Would you like to install insync? (Y/N)"
 read -r ANSWER
 if [ "$ANSWER" = "Y" ]
 then
-    wget -P /tmp https://d2t3ff60b2tol4.cloudfront.net/builds/insync_3.0.30.40732-bionic_amd64.deb
-    sudo dpkg -i /tmp/insync_3.0.30.40732-bionic_amd64.deb
+    wget -P /tmp "https://d2t3ff60b2tol4.cloudfront.net/builds/$INSYNC"
+    sudo dpkg -i "/tmp/$INSYNC"
 fi
 
 # Download and run Jetbrains Toolbox

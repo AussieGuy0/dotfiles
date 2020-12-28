@@ -1,13 +1,24 @@
 # dotfiles
+My personal dotfiles, use at own risk!
+
+Inspired by https://drewdevault.com/2019/12/30/dotfiles.html
 
 ## Installation
 ```sh
-wget https://raw.githubusercontent.com/AussieGuy0/dotfiles/master/scripts/setup/packages.txt
-curl -sSL https://raw.githubusercontent.com/AussieGuy0/dotfiles/master/scripts/setup/setup.sh | bash
+cd ~
+git init
+git remote add origin git@github.com:AussieGuy0/dotfiles.git
+git fetch
+git checkout -f master
+./setup/setup.sh
+```
+
+## Adding new files
+```sh
+git add -f .file
 ```
 
 ## Syncing dotfiles from remote
-From project root:
-```bash
-./scripts/update-dotfiles.sh
+```sh
+updots
 ```
