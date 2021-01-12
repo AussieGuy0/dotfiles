@@ -13,6 +13,8 @@ INSYNC="insync_3.3.4.40916-focal_amd64.deb"
 NVM_VERSION="0.37.2"
 
 echo "Updating system"
+# Alacritty
+sudo add-apt-repository ppa:aslatter/ppa 
 sudo apt update
 sudo apt -y upgrade 
 

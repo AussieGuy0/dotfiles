@@ -24,3 +24,4 @@ cmake
 python-dev
 python3-dev
 golang
+alacritty
