@@ -161,7 +161,7 @@ hide_edge_borders both
 bar {
         position top
         font pango:DejaVu Sans Mono 10, Awesome 9
-        status_command i3blocks -c ~/.i3/i3blocks.conf
+        status_command i3blocks -c ~/.config/.i3/i3blocks.conf
         colors {
                     background $bg-color
                     separator #757575
