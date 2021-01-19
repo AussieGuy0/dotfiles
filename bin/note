@@ -21,9 +21,9 @@ args = parser.parse_args()
 query = args.query
 
 path = Path(notes_path)
-glob = f"*{query}*"
+glob = f"*{query}*.md"
 
-files = list(path.glob(glob))
+files = list(path.rglob(glob))
 
 if len(files) == 0:
     print(f"No files match the query: {query}")
