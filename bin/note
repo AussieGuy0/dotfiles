@@ -1,0 +1,38 @@
+#!/usr/bin/env python3
+
+import argparse
+from pathlib import Path
+import subprocess
+
+
+def open_file(path):
+    subprocess.run(["vim", str(path)])
+
+
+# TODO: Make path configurable
+home_path = str(Path.home())
+notes_path = home_path + "/Drive/Notes"
+
+# TODO: Add way to add notes
+parser = argparse.ArgumentParser(description='Note management')
+parser.add_argument('query', type=str)
+args = parser.parse_args()
+
+query = args.query
+
+path = Path(notes_path)
+glob = f"*{query}*"
+
+files = list(path.glob(glob))
+
+if len(files) == 0:
+    print(f"No files match the query: {query}")
+elif len(files) == 1:
+    file = files[0]
+    open_file(file)
+else:
+    print("Multiple files match. Please select:")
+    for i, file in enumerate(files):
+        print(f"{i}: {str(file)}")
+    num = int(input())
+    open_file(files[num])
