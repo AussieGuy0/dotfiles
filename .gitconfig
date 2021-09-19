@@ -8,5 +8,6 @@
 [alias]
     s = status
     dt = difftool
+
 [diff]
     tool = vimdiff

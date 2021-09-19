@@ -5,16 +5,15 @@ CURR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "$CURR_DIR"
 
 DEVPATH="$HOME/dev"
-TOOLDIR="$DEVPATH/tools"
 IDEDIR="$DEVPATH/ide" 
 
 TOOLBOX="jetbrains-toolbox-1.19.7784.tar.gz"
-INSYNC="insync_3.3.4.40916-focal_amd64.deb"
-NVM_VERSION="0.37.2"
+INSYNC="insync_3.5.3.50123-focal_amd64.deb"
 
-echo "Updating system"
 # Alacritty
 sudo add-apt-repository ppa:aslatter/ppa 
+
+echo "Updating system"
 sudo apt update
 sudo apt -y upgrade 
 
@@ -38,14 +37,6 @@ vim +PlugInstall
 cd ~/.vim/plugged/YouCompleteMe
 python3 install.py --ts-completer --go-completer
 cd "$CURR_DIR"
-
-# Setup nvm
-cd "$TOOLDIR"
-git clone https://github.com/nvm-sh/nvm.git nvm
-cd nvm
-git checkout v"$NVM_VERSION"
-cd "$CURR_DIR"
-
 
 # Setup ssh key
 echo "Would you like to generate a SSH key? (Y/N)"
