@@ -38,6 +38,7 @@ set showmatch " highlights matching brackets
 set wildmenu " visual autocomplete for command menu
 set title " Shows title of file in top bar
 set ruler " Show linenumber, char pos at bottom
+set scrolloff=4
 
 " =Searching=
 set incsearch " Search as characters are entered
@@ -86,6 +87,14 @@ nnoremap <silent> <leader>gf :YcmCompleter FixIt<CR>
 " Who needs NERDTree?
 let g:netrw_banner = 0
 nnoremap <leader>pv :30Lex<CR>
+
+" Destroy whitespace
+fun! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+autocmd BufWritePre * if !&binary | call TrimWhitespace() | endif
 
 " == PLUGIN & COLOURS ==
 
