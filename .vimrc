@@ -2,24 +2,26 @@ set nocompatible              " be iMproved, required
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'airblade/vim-gitgutter'  " Visual representation of changed lines
 Plug 'dense-analysis/ale' " Syntax checker
+Plug 'junegunn/goyo.vim' " No distraction mode
 Plug 'lifepillar/vim-solarized8' " Solarized Color Scheme
+Plug 'nvim-lua/plenary.nvim' " Required for telescope
+Plug 'nvim-telescope/telescope.nvim' " Fuzzy search across project
+Plug 'mhinz/vim-startify' " Custom start screen
 Plug 'rstacruz/vim-closer' " Bracket Closer
 Plug 'sheerun/vim-polyglot' " Multi-language support
-Plug 'airblade/vim-gitgutter'  " Visual representation of changed lines
-Plug 'mhinz/vim-startify' " Custom start screen
-Plug 'junegunn/goyo.vim' " No distraction mode
+Plug 'tpope/vim-commentary' " Comment stuff out
+Plug 'vim-airline/vim-airline' " Better status bar
+Plug 'vim-airline/vim-airline-themes'
 Plug 'vimwiki/vimwiki' " wiki
 Plug 'ycm-core/YouCompleteMe'
 
-Plug 'vim-airline/vim-airline' " Better status bar
-Plug 'vim-airline/vim-airline-themes'
-
 " Clojure
-Plug 'tpope/vim-salve'
-Plug 'tpope/vim-projectionist'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-fireplace'
+Plug 'tpope/vim-salve', { 'for': 'clojure' }
+Plug 'tpope/vim-projectionist', { 'for': 'clojure' }
+Plug 'tpope/vim-dispatch', { 'for': 'clojure' }
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -80,13 +82,23 @@ nnoremap k gk
 nnoremap <leader>ev :split $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
-nnoremap <silent> <leader>gd :YcmCompleter GoTo<CR>
-nnoremap <silent> <leader>gf :YcmCompleter FixIt<CR>
+nnoremap <silent> <leader>gd :YcmCompleter GoTo<cr>
+nnoremap <silent> <leader>gf :YcmCompleter FixIt<cr>
 
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope git_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" Commentary
+" This maps commentary to ctrl + / in both normal and visual modes.
+nnoremap <C-_> :Commentary<cr>
+xnoremap <C-_> :Commentary<cr>
 
 " Who needs NERDTree?
 let g:netrw_banner = 0
-nnoremap <leader>pv :30Lex<CR>
+nnoremap <leader>pv :30Lex<cr>
 
 " Destroy whitespace
 fun! TrimWhitespace()
