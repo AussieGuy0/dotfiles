@@ -12,8 +12,9 @@ alias vim='nvim'
 alias vimpls='\vim'
 
 alias g='git'
+alias gp='git push'
+alias gd='git diff'
 alias gds='git diff --staged'
-
 
 if is_bin_in_path exa
 then
