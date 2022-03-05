@@ -15,7 +15,8 @@ Plug 'tpope/vim-commentary' " Comment stuff out
 Plug 'vim-airline/vim-airline' " Better status bar
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vimwiki/vimwiki' " wiki
-Plug 'ycm-core/YouCompleteMe'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'github/copilot.vim'
 
 " Clojure
 Plug 'tpope/vim-salve', { 'for': 'clojure' }
