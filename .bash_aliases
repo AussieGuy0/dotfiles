@@ -2,8 +2,11 @@ is_bin_in_path() {
     builtin type -P "$1" &> /dev/null
 }
 
+[ -s "$HOME/.bash_local_aliases" ] && \. "$HOME/.bash_local_aliases"
+
 alias repos='cd ~/dev/repos/'
 alias cd..='cd ..'
+
 alias diary='vim -c +VimwikiMakeDiaryNote'
 alias diaryi='vim -c +VimwikiDiaryIndex'
 alias wiki='vim -c +VimwikiIndex'
