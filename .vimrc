@@ -91,11 +91,6 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
-" Commentary
-" This maps commentary to ctrl + / in both normal and visual modes.
-nnoremap <C-_> :Commentary<cr>
-xnoremap <C-_> :Commentary<cr>
-
 " Who needs NERDTree?
 let g:netrw_banner = 0
 nnoremap <leader>pv :30Lex<cr>
@@ -117,6 +112,23 @@ let g:airline_theme='solarized'
 let g:ale_open_list = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
+
+" =Coc=
+" use <tab> to trigger completion and navigate to the next complete item
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+
+" =Commentary=
+" This maps commentary to ctrl + / in both normal and visual modes.
+nnoremap <C-_> :Commentary<cr>
+xnoremap <C-_> :Commentary<cr>
 
 " =VimWiki=
 let g:vimwiki_list = [{'path': '~/Drive/Notes', 'syntax': 'markdown', 'ext': '.md'}]
