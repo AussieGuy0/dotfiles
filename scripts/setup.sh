@@ -7,25 +7,44 @@ cd "$CURR_DIR"
 DEVPATH="$HOME/dev"
 IDEDIR="$DEVPATH/ide"
 
-TOOLBOX="jetbrains-toolbox-1.19.7784.tar.gz"
-INSYNC="insync_3.5.3.50123-focal_amd64.deb"
+TOOLBOX="jetbrains-toolbox-1.27.3.14493.tar.gz"
+INSYNC="insync_3.8.4.50481-jammy_amd64.deb"
 
-# Alacritty
-sudo add-apt-repository ppa:aslatter/ppa
+case "$(uname -s)" in
+    Linux*)     machine=Linux;;
+    Darwin*)    machine=Mac;;
+    CYGWIN*)    machine=Cygwin;;
+    MINGW*)     machine=MinGw;;
+    *)          machine="UNKNOWN"
+esac
 
-echo "Updating system"
-sudo apt update
-sudo apt -y upgrade
+# Update system and install packages on Linux (assuming Debian based system)
+if [ "$machine" = "Linux" ]
+then
+    # Alacritty
+    sudo add-apt-repository ppa:aslatter/ppa
 
-echo "Installing packages"
-cat packages.txt | xargs sudo apt -y install
+    # Docker (https://docs.docker.com/engine/install/ubuntu/#set-up-the-repository)
+    sudo apt install ca-certificates curl gnupg lsb-release
+    sudo mkdir -m 0755 -p /etc/apt/keyrings
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-sudo snap install spotify
-sudo snap install code --classic
-sudo snap install docker
+    echo "Updating system"
+    sudo apt update
+    sudo apt -y upgrade
 
-# Setup SDKMAN
-curl -s "https://get.sdkman.io" | bash
+    echo "Installing packages"
+    cat packages.txt | xargs sudo apt -y install
+
+    sudo snap install spotify
+    sudo snap install code --classic
+    sudo snap install docker
+
+    # Setup SDKMAN
+    curl -s "https://get.sdkman.io" | bash
+fi
 
 # Setup vim
 echo "Setting up vim"
@@ -41,7 +60,7 @@ echo "Would you like to generate a SSH key? (Y/N)"
 read -r ANSWER
 if [ "$ANSWER" = "Y" ]
 then
-    ssh-keygen -t rsa -b 4096
+    ssh-keygen -t ed25519
 fi
 
 # Download and install insync
@@ -49,12 +68,17 @@ echo "Would you like to install insync? (Y/N)"
 read -r ANSWER
 if [ "$ANSWER" = "Y" ]
 then
-    wget -P /tmp "https://d2t3ff60b2tol4.cloudfront.net/builds/$INSYNC"
+    wget -P /tmp "https://cdn.insynchq.com/builds/linux/$INSYNC"
     sudo dpkg -i "/tmp/$INSYNC"
 fi
 
 # Download and run Jetbrains Toolbox
-echo "Setting up Jetbrains Toolbox"
-wget -P /tmp https://download.jetbrains.com/toolbox/$TOOLBOX
-tar -xvzf /tmp/"$TOOLBOX" -C "$IDEDIR/"
-sh "$IDEDIR/$TOOLBOX"/jetbrans-toolbox
+echo "Would you like to Jetbrains Toolbox?? (Y/N)"
+read -r ANSWER
+if [ "$ANSWER" = "Y" ]
+then
+    echo "Setting up Jetbrains Toolbox"
+    wget -P /tmp https://download.jetbrains.com/toolbox/$TOOLBOX
+    tar -xvzf /tmp/"$TOOLBOX" -C "$IDEDIR/"
+    sh "$IDEDIR/$TOOLBOX"/jetbrans-toolbox
+fi
