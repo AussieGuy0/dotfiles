@@ -16,7 +16,6 @@ Plug 'vim-airline/vim-airline' " Better status bar
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vimwiki/vimwiki' " wiki
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'github/copilot.vim'
 
 " Clojure
 Plug 'tpope/vim-salve', { 'for': 'clojure' }
