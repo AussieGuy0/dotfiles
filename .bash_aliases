@@ -19,6 +19,8 @@ alias gp='git push'
 alias gd='git diff'
 alias gds='git diff --staged'
 
+alias fly='~/.fly/bin/flyctl'
+
 if is_bin_in_path exa
 then
     alias ls='exa'

@@ -11,3 +11,6 @@
 
 [diff]
     tool = vimdiff
+[push]
+	autoSetupRemote = true
+	default = current

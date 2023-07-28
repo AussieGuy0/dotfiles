@@ -2,7 +2,7 @@ mouse_bindings:
    - { mouse: Right,  action: Copy }
 
 font:
-  size: 8
+  size: 10
 
 # Colors (Solarized Dark)
 colors:
