@@ -22,6 +22,7 @@ alias gds='git diff --staged'
 alias fly='~/.fly/bin/flyctl'
 
 alias gho='git --work-tree=$HOME --git-dir=$HOME/.home'
+alias ghod='git --work-tree=$HOME --git-dir=$HOME/.home add -f'
 
 if is_bin_in_path exa
 then

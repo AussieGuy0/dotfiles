@@ -23,7 +23,6 @@
   targets.genericLinux.enable = true;
   xdg.mime.enable = true;
   xdg.systemDirs.data = [ "${config.home.homeDirectory}/.nix-profile/share/applications" ];
-  # programs.bash.enable = true;
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -36,6 +35,7 @@
     pkgs.docker
     pkgs.docker-compose
     pkgs.exa
+    pkgs.flyctl
     pkgs.firefox
     pkgs.flameshot
     pkgs.git
@@ -43,6 +43,7 @@
     pkgs.insync
     pkgs.jdk17
     pkgs.jetbrains-toolbox
+    pkgs.nodejs_20
     pkgs.maven
     pkgs.neovim
     pkgs.spotify
@@ -68,8 +69,8 @@
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    ".profile".source = ~/.profile;
-    ".bash_profile".source = ~/.bash_profile;
+    ".bash_aliases".source = config.lib.file.mkOutOfStoreSymlink ~/.bash_aliases;
+    ".vimrc".source = config.lib.file.mkOutOfStoreSymlink ~/.vimrc;
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
@@ -80,6 +81,19 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+  };
+
+  programs = {
+    bash = {
+      enable = true;
+      # Enabling generic linux target above seems to set an invalid NIX_PATH.
+      # Unsetting seems to fix the problem \_(._.)_/
+      initExtra = "
+        export PATH=~/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:$PATH
+        . ~/.bash_aliases
+        unset NIX_PATH
+      ";
+    };
   };
 
   # You can also manage environment variables but you will have to manually
@@ -93,8 +107,8 @@
   #
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
-    # EDITOR = "emacs";
-    LOCALE_ARCHIVE =  "${pkgs.glibcLocales}/lib/locale/locale-archive";
+    EDITOR = "vim";
+    LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
   };
 
 

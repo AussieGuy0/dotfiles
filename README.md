@@ -10,7 +10,7 @@ with dotfiles in the home directory.
 
 ## Installation
 ```sh
-# This makes next commands a bit easier.
+# This makes the next commands look nicer.
 alias gho='git --work-tree=$HOME --git-dir=$HOME/.home'
 
 cd ~
@@ -21,9 +21,18 @@ gho checkout -f master
 ./scripts/setup.sh
 ```
 
+### Installation using Nix (experimental)
+1. Install Nix (https://nixos.org/download#nix-install-linux)
+2. Install Home Manager
+   (https://nix-community.github.io/home-manager/index.html#sec-install-standalone)
+3. Run `home-manager switch`
+
+
 ## Adding new files
 ```sh
-gho add -f .file
+ghod .file
+# or
+# gho add -f .file
 ```
 
 ## Syncing dotfiles from remote
