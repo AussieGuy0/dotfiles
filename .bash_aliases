@@ -19,7 +19,7 @@ alias gp='git push'
 alias gd='git diff'
 alias gds='git diff --staged'
 
-alias fly='~/.fly/bin/flyctl'
+alias fly='flyctl'
 
 alias gho='git --work-tree=$HOME --git-dir=$HOME/.home'
 alias ghod='git --work-tree=$HOME --git-dir=$HOME/.home add -f'
