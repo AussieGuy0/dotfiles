@@ -16,7 +16,11 @@
   home.stateVersion = "23.05"; # Please read the comment before changing.
 
   # Allow unfree software https://nixos.wiki/wiki/Unfree_Software
-  nixpkgs.config.allowUnfreePredicate = _: true;
+  nixpkgs.config =  {
+    allowUnfreePredicate = _: true;
+    # Obsidian uses old insecure version of electron https://github.com/NixOS/nixpkgs/issues/273611.
+    permittedInsecurePackages = pkgs.lib.optional (pkgs.obsidian.version == "1.4.16") "electron-25.9.0";
+  };
 
   # Enables Gnome integration with Ubuntu
   # https://github.com/nix-community/home-manager/issues/1439#issuecomment-1605851533
@@ -34,24 +38,22 @@
     pkgs.curl
     pkgs.docker
     pkgs.docker-compose
-    pkgs.exa
+    pkgs.eza
     pkgs.flyctl
     pkgs.firefox
     pkgs.flameshot
     pkgs.git
     pkgs.go
     pkgs.insync
-    pkgs.jdk17
+    pkgs.jdk21
     pkgs.jetbrains-toolbox
     pkgs.nodejs_20
+    pkgs.obsidian
     pkgs.maven
     pkgs.neovim
     pkgs.spotify
+    pkgs.tmux
     pkgs.vscode
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
-
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -69,8 +71,12 @@
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    ".bash_aliases".source = config.lib.file.mkOutOfStoreSymlink ~/.bash_aliases;
-    ".vimrc".source = config.lib.file.mkOutOfStoreSymlink ~/.vimrc;
+    ".bash_aliases".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.bash_aliases";
+    ".vimrc".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.vimrc";
+    ".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.tmux.conf";
+    ".npmrc".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.npmrc";
+    ".config/nvim/init.vim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/nvim/init.vim";
+    ".config/alacritty.yml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/alacritty.yml";
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
