@@ -18,8 +18,6 @@
   # Allow unfree software https://nixos.wiki/wiki/Unfree_Software
   nixpkgs.config =  {
     allowUnfreePredicate = _: true;
-    # Obsidian uses old insecure version of electron https://github.com/NixOS/nixpkgs/issues/273611.
-    permittedInsecurePackages = pkgs.lib.optional (pkgs.obsidian.version == "1.4.16") "electron-25.9.0";
   };
 
   # Enables Gnome integration with Ubuntu
