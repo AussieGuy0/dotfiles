@@ -1,6 +1,39 @@
 { config, pkgs, ... }:
 
-{
+let
+  # All this to get alacritty to work :(
+  nixGLWrap = pkg: pkgs.runCommand "${pkg.name}-nixgl-pkg-wrapper" {} ''
+    # Create a new package that wraps the binaries with nixGL
+    mkdir $out
+    ln -s ${pkg}/* $out
+    rm $out/bin
+    mkdir $out/bin
+    for bin in ${pkg}/bin/*
+    do
+      wrapped_bin=$out/bin/$(basename $bin)
+      echo "#!/bin/sh" > $wrapped_bin
+      echo "exec nixGL $bin \"\$@\"" >> $wrapped_bin
+      chmod +x $wrapped_bin
+    done
+
+    # If .desktop files refer to the old derivation, replace the references
+    if [ -d "${pkg}/share/applications" ] && grep "${pkg}" ${pkg}/share/applications/*.desktop > /dev/null
+    then
+        rm $out/share
+        mkdir -p $out/share
+        cd $out/share
+        ln -s ${pkg}/share/* ./
+        rm applications
+        mkdir applications
+        cd applications
+        cp -a ${pkg}/share/applications/* ./
+        for dsk in *.desktop
+        do
+            sed -i "s|${pkg}|$out|g" "$dsk"
+        done
+    fi
+  '';
+in {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "anthony";
@@ -29,7 +62,7 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-    pkgs.alacritty
+    (nixGLWrap pkgs.alacritty)
     pkgs.chromium
     pkgs.clipit
     pkgs.cmake
