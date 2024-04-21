@@ -2,7 +2,7 @@
 
 let
   # All this to get alacritty to work :(
-  nixGLWrap = pkg: pkgs.runCommand "${pkg.name}-nixgl-pkg-wrapper" {} ''
+  nixGLWrap = pkg: pkgs.runCommand "${pkg.name}-nixgl-pkg-wrapper" { } ''
     # Create a new package that wraps the binaries with nixGL
     mkdir $out
     ln -s ${pkg}/* $out
@@ -33,7 +33,8 @@ let
         done
     fi
   '';
-in {
+in
+{
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "anthony";
@@ -49,7 +50,7 @@ in {
   home.stateVersion = "23.05"; # Please read the comment before changing.
 
   # Allow unfree software https://nixos.wiki/wiki/Unfree_Software
-  nixpkgs.config =  {
+  nixpkgs.config = {
     allowUnfreePredicate = _: true;
   };
 
@@ -63,40 +64,39 @@ in {
   # environment.
   home.packages = [
     (nixGLWrap pkgs.alacritty)
-    pkgs.chromium
-    pkgs.clipit
+    # Programming Languages & Build Tools
+    pkgs.cargo
+    pkgs.clojure
+    pkgs.clojure-lsp
     pkgs.cmake
+    pkgs.go
+    pkgs.jdk21
+    pkgs.nodejs_20
+    pkgs.maven
+
+    # Programming Tools & CLI
     pkgs.curl
     pkgs.docker
     pkgs.docker-compose
     pkgs.eza
     pkgs.flyctl
+    pkgs.git
+    pkgs.jetbrains-toolbox
+    pkgs.neovim
+    pkgs.vscode
+    pkgs.zellij
+
+    # Other
+    pkgs.chromium
+    pkgs.clipit
+    pkgs.emote
+    pkgs.exercism
     pkgs.firefox
     pkgs.flameshot
-    pkgs.git
-    pkgs.go
-    pkgs.insync
-    pkgs.jdk21
-    pkgs.jetbrains-toolbox
-    pkgs.nodejs_20
+    (nixGLWrap pkgs.insync)
     pkgs.obsidian
-    pkgs.maven
-    pkgs.neovim
+    (nixGLWrap pkgs.obs-studio)
     pkgs.spotify
-    pkgs.tmux
-    pkgs.vscode
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -104,7 +104,6 @@ in {
   home.file = {
     ".bash_aliases".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.bash_aliases";
     ".vimrc".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.vimrc";
-    ".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.tmux.conf";
     ".npmrc".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.npmrc";
     ".config/nvim/init.vim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/nvim/init.vim";
     ".config/alacritty.yml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/alacritty.yml";
@@ -145,6 +144,8 @@ in {
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
     EDITOR = "vim";
+    BROWSER = "firefox";
+    TERMINAL = "alacritty";
     # Setting this to fix issue with man pages locale.
     LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
   };
