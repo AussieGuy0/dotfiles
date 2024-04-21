@@ -84,7 +84,6 @@ in
     pkgs.jetbrains-toolbox
     pkgs.neovim
     pkgs.vscode
-    pkgs.zellij
 
     # Other
     pkgs.chromium
@@ -129,6 +128,11 @@ in
         . ~/.bash_aliases
         unset NIX_PATH
       ";
+    };
+
+    zellij = {
+      enable = true;
+      enableBashIntegration = true;
     };
   };
 
