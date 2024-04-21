@@ -15,19 +15,20 @@ Plug 'tpope/vim-commentary' " Comment stuff out
 Plug 'vim-airline/vim-airline' " Better status bar
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vimwiki/vimwiki' " wiki
+Plug 'LnL7/vim-nix' " Nix
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Clojure
-Plug 'tpope/vim-salve', { 'for': 'clojure' }
-Plug 'tpope/vim-projectionist', { 'for': 'clojure' }
-Plug 'tpope/vim-dispatch', { 'for': 'clojure' }
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
+Plug 'Olical/conjure', { 'for': 'clojure' }
 
 " All of your Plugins must be added before the following line
 call plug#end()
 
 " =General=
 let mapleader = ","
+let maplocalleader=","
 let g:mapleader = ","
 
 " Sets how many lines of history VIM has to remember
