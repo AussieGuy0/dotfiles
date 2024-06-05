@@ -24,7 +24,15 @@ alias fly='flyctl'
 alias gho='git --work-tree=$HOME --git-dir=$HOME/.home'
 alias ghod='git --work-tree=$HOME --git-dir=$HOME/.home add -f'
 
-if is_bin_in_path exa
+alias cljrepl='clj -Sdeps '\''{:deps {nrepl/nrepl {:mvn/version "1.0.0"} cider/cider-nrepl {:mvn/version "0.42.1"}}}\'\'' \
+    --main nrepl.cmdline \
+    --middleware '\''["cider.nrepl/cider-middleware"]'\'' \
+    --interactive'
+
+alias nix-update='cd ~/.config/home-manager && nix flake update && home-manager switch --flake . && cd -'
+alias nix-edit='vim  ~/.config/home-manager/home.nix'
+
+if is_bin_in_path eza
 then
-    alias ls='exa'
+    alias ls='eza'
 fi
