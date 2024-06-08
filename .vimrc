@@ -1,27 +1,23 @@
-set nocompatible              " be iMproved, required
-
 call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'  " Visual representation of changed lines
 Plug 'dense-analysis/ale' " Syntax checker
-Plug 'junegunn/goyo.vim' " No distraction mode
 Plug 'lifepillar/vim-solarized8' " Solarized Color Scheme
 Plug 'nvim-lua/plenary.nvim' " Required for telescope
 Plug 'nvim-telescope/telescope.nvim' " Fuzzy search across project
 Plug 'mhinz/vim-startify' " Custom start screen
 Plug 'rstacruz/vim-closer' " Bracket Closer
 Plug 'sheerun/vim-polyglot' " Multi-language support
-Plug 'tpope/vim-commentary' " Comment stuff out
 Plug 'vim-airline/vim-airline' " Better status bar
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vimwiki/vimwiki' " wiki
-Plug 'LnL7/vim-nix' " Nix
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'liuchengxu/vim-which-key'
 
 " Clojure
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
-Plug 'Olical/conjure', { 'for': 'clojure' }
+Plug 'Olical/conjure'
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -29,23 +25,36 @@ call plug#end()
 " =General=
 let mapleader = ","
 let maplocalleader=","
-let g:mapleader = ","
 
-" Sets how many lines of history VIM has to remember
-set history=1000
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  auto_install = true,
+}
+EOF
+
+if !has('nvim')
+  set nocompatible
+  set autoindent
+  set smarttab
+  set background=dark
+  set history=10000
+  set hlsearch " highlight matches
+  set incsearch " Search as characters are entered
+  set autoread
+  set wildmenu " visual autocomplete for command menu
+  set ruler " Show linenumber, char pos at bottom
+  set termguicolors
+endif
+
 
 " =UI=
 set number " Shows line numbers
 set cursorline " highlights current line
 set showmatch " highlights matching brackets
-set wildmenu " visual autocomplete for command menu
 set title " Shows title of file in top bar
-set ruler " Show linenumber, char pos at bottom
 set scrolloff=4
 
 " =Searching=
-set incsearch " Search as characters are entered
-set hlsearch " highlight matches
 set ignorecase
 set smartcase
 
@@ -55,11 +64,7 @@ set softtabstop=4 " number of spaces in TAB when editing
 set expandtab " tabs are spaces
 set shiftwidth=4 " sets indentation to 4 spaces
 
-set autoindent
 set smartindent
-set smarttab
-
-set autoread
 
 " =Backups=
 set nobackup
@@ -113,6 +118,7 @@ let g:airline_theme='solarized'
 let g:ale_open_list = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
+let g:ale_linters = {'clojure': ['clj-kondo']}
 
 " =Coc=
 " use <tab> to trigger completion and navigate to the next complete item
@@ -130,11 +136,7 @@ inoremap <silent><expr> <Tab>
 " <C-g>u breaks current undo, please make your own choice
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" =Commentary=
-" This maps commentary to ctrl + / in both normal and visual modes.
-nnoremap <C-_> :Commentary<cr>
-xnoremap <C-_> :Commentary<cr>
+nnoremap <leader>rn <Plug>(coc-rename)
 
 " =VimWiki=
 let g:vimwiki_list = [{'path': '~/Drive/Notes', 'syntax': 'markdown', 'ext': '.md'}]
@@ -156,8 +158,10 @@ augroup templates
   autocmd BufNewFile *.* silent! execute '0r ~/.vim/templates/skeleton.'.expand("<afile>:e")
 augroup END
 
+
+" =WhichKey=
+nnoremap <silent> <leader>      :<c-u>WhichKey  ','<CR>
+nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
+
 " =Colors=
-syntax enable " Enables syntax highlighting
-set background=dark
-set termguicolors
 colorscheme solarized8
