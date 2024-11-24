@@ -1,3 +1,7 @@
+[terminal.shell]
+program = "zellij"
+args = ["-l", "welcome"]
+
 [colors.bright]
 black = "#002b36"
 blue = "#839496"
@@ -32,3 +36,5 @@ size = 12
 [[mouse.bindings]]
 action = "Copy"
 mouse = "Right"
+
+[terminal]

@@ -2,6 +2,7 @@ is_bin_in_path() {
     builtin type -P "$1" &> /dev/null
 }
 
+# Allow system-specific aliases (e.g. work aliases)
 [ -s "$HOME/.bash_local_aliases" ] && \. "$HOME/.bash_local_aliases"
 
 alias repos='cd ~/dev/repos/'
