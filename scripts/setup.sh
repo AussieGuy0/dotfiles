@@ -4,12 +4,6 @@ set -eu
 CURR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "$CURR_DIR"
 
-readonly DEVPATH="$HOME/dev"
-readonly IDEDIR="$DEVPATH/ide"
-
-readonly TOOLBOX="jetbrains-toolbox-1.27.3.14493.tar.gz"
-readonly INSYNC="insync_3.8.4.50481-jammy_amd64.deb"
-
 case "$(uname -s)" in
     Linux*)     machine=Linux;;
     Darwin*)    machine=Mac;;
@@ -21,29 +15,13 @@ esac
 # Update system and install packages on Linux (assuming Debian based system)
 if [ "$machine" = "Linux" ]
 then
-    # Alacritty
-    sudo add-apt-repository ppa:aslatter/ppa
-
-    # Docker (https://docs.docker.com/engine/install/ubuntu/#set-up-the-repository)
-    sudo apt install ca-certificates curl gnupg lsb-release
-    sudo mkdir -m 0755 -p /etc/apt/keyrings
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-
-    echo "Updating system"
-    sudo apt update
-    sudo apt -y upgrade
-
-    echo "Installing packages"
-    cat packages.txt | xargs sudo apt -y install
-
-    sudo snap install spotify
-    sudo snap install code --classic
-    sudo snap install docker
-
-    # Setup SDKMAN
-    curl -s "https://get.sdkman.io" | bash
+    # Setting up nix.
+    echo "Installing nix"
+    sh <(curl -L https://nixos.org/nix/install) --daemon
+    nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+    nix-channel --update
+    echo "First run of home manager, this may take a while!"
+    nix-update
 fi
 
 # Setup vim
@@ -83,24 +61,4 @@ read -r answer
 if [ "$answer" = "Y" ]
 then
     ssh-keygen -t ed25519
-fi
-
-# Download and install insync
-echo "Would you like to install insync? (Y/N)"
-read -r answer
-if [ "$answer" = "Y" ]
-then
-    wget -P /tmp "https://cdn.insynchq.com/builds/linux/$INSYNC"
-    sudo dpkg -i "/tmp/$INSYNC"
-fi
-
-# Download and run Jetbrains Toolbox
-echo "Would you like to Jetbrains Toolbox?? (Y/N)"
-read -r answer
-if [ "$answer" = "Y" ]
-then
-    echo "Setting up Jetbrains Toolbox"
-    wget -P /tmp https://download.jetbrains.com/toolbox/$TOOLBOX
-    tar -xvzf /tmp/"$TOOLBOX" -C "$IDEDIR/"
-    sh "$IDEDIR/$TOOLBOX"/jetbrans-toolbox
 fi

@@ -21,7 +21,11 @@ gho checkout -f master
 ./scripts/setup.sh
 ```
 
-### Installation using Nix (experimental)
+### A note about Nix
+I use nix home-manager to manage my system.
+The above commands *should* set up nix in the right state.
+If not, follow the below instructions:
+
 1. Install Nix (https://nixos.org/download#nix-install-linux)
 2. Install Home Manager
    (https://nix-community.github.io/home-manager/index.html#sec-install-standalone)
