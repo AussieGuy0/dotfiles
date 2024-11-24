@@ -29,7 +29,7 @@ alias cljrepl='clj -Sdeps '\''{:deps {nrepl/nrepl {:mvn/version "1.0.0"} cider/c
     --middleware '\''["cider.nrepl/cider-middleware"]'\'' \
     --interactive'
 
-alias nix-update='cd ~/.config/home-manager && nix flake update && home-manager switch --flake . && cd -'
+alias nix-update='cd ~/.config/home-manager && nix flake update && NIXPKGS_ALLOW_UNFREE=1 home-manager switch --impure --flake . && cd -'
 alias nix-edit='vim  ~/.config/home-manager/home.nix'
 
 if is_bin_in_path eza
