@@ -47,6 +47,8 @@ in
     pkgs.jdk21
     pkgs.nodejs_20
     pkgs.maven
+    pkgs.yarn
+    pkgs.sqlite
 
     # Programming Tools & CLI
     pkgs.curl
@@ -62,7 +64,7 @@ in
 
     # Other
     pkgs.chromium
-    pkgs.clipit
+    pkgs.copyq
     pkgs.emote
     pkgs.exercism
     pkgs.firefox
@@ -108,7 +110,6 @@ in
 
     zellij = {
       enable = true;
-      enableBashIntegration = true;
     };
   };
 
