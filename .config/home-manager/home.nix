@@ -36,7 +36,6 @@ in
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-    (nixGLwrap pkgs.alacritty)
     # Programming Languages & Build Tools
     pkgs.cargo
     pkgs.clojure
@@ -51,6 +50,8 @@ in
     pkgs.sqlite
 
     # Programming Tools & CLI
+    (nixGLwrap pkgs.alacritty)
+    (nixGLwrap pkgs.ghostty)
     pkgs.curl
     pkgs.docker
     pkgs.docker-compose
@@ -126,7 +127,7 @@ in
   home.sessionVariables = {
     EDITOR = "vim";
     BROWSER = "firefox";
-    TERMINAL = "alacritty";
+    TERMINAL = "ghostty";
     # Setting this to fix issue with man pages locale.
     LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
   };
