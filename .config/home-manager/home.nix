@@ -41,6 +41,7 @@ in
     pkgs.clojure
     pkgs.clojure-lsp
     pkgs.clj-kondo
+    pkgs.libclang
     pkgs.cmake
     pkgs.go
     pkgs.jdk21
@@ -70,11 +71,12 @@ in
     pkgs.exercism
     pkgs.firefox
     pkgs.flameshot
-    (nixGLwrap pkgs.insync)
+    # (nixGLwrap pkgs.insync) # Have problems with nix insync. Install via https://www.insynchq.com/downloads/linux
     pkgs.obsidian
     (nixGLwrap pkgs.obs-studio)
     pkgs.anki
     pkgs.spotify
+    pkgs.xclip
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
