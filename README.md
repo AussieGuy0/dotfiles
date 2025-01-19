@@ -10,6 +10,7 @@ with dotfiles in the home directory.
 
 ## Installation
 ```sh
+sudo apt install curl git
 # This makes the next commands look nicer.
 alias gho='git --work-tree=$HOME --git-dir=$HOME/.home'
 
