@@ -7,7 +7,9 @@
 
 
     # NixGL for GPU apps.
-    nixgl.url = "github:nix-community/nixGL";
+    # Need to use open PR cause master is broken for Ubuntu 24.10+
+    # https://github.com/nix-community/nixGL/issues/199
+    nixgl.url = "github:nix-community/nixGL/pull/187/head";
     nixgl.inputs.nixpkgs.follows = "nixpkgs";
 
     # Home manager

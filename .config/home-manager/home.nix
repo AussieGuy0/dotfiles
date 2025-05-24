@@ -42,41 +42,48 @@ in
     pkgs.clojure-lsp
     pkgs.clj-kondo
     pkgs.libclang
+    pkgs.gcc
     pkgs.cmake
     pkgs.go
-    pkgs.jdk21
-    pkgs.nodejs_20
     pkgs.maven
+    pkgs.nodejs_20
     pkgs.yarn
     pkgs.sqlite
 
-    # Programming Tools & CLI
-    (nixGLwrap pkgs.alacritty)
+    # CLI
     (nixGLwrap pkgs.ghostty)
     pkgs.curl
-    pkgs.docker
-    pkgs.docker-compose
     pkgs.eza
+    pkgs.fd
     pkgs.flyctl
     pkgs.git
-    pkgs.jetbrains-toolbox
     pkgs.llm
+    pkgs.xclip
+    pkgs.zellij
+
+    # Editors
+    pkgs.code-cursor
+    pkgs.jetbrains-toolbox
     pkgs.neovim
     pkgs.vscode
 
     # Other
-    pkgs.chromium
+    (nixGLwrap pkgs.anki)
     pkgs.copyq
+    pkgs.discord
     pkgs.emote
     pkgs.exercism
     pkgs.firefox
     pkgs.flameshot
-    # (nixGLwrap pkgs.insync) # Have problems with nix insync. Install via https://www.insynchq.com/downloads/linux
     pkgs.obsidian
     (nixGLwrap pkgs.obs-studio)
-    pkgs.anki
     pkgs.spotify
-    pkgs.xclip
+    pkgs.vlc
+
+    # Archive
+    # (nixGLwrap pkgs.insync) # Have problems with nix insync. Install via https://www.insynchq.com/downloads/linux
+    # pkgs.docker # A lot of manual config to get this running as a service.
+    # pkgs.docker-compose # Same as above.
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -110,8 +117,11 @@ in
         unset NIX_PATH
       ";
     };
-
-    zellij = {
+    java = {
+      enable = true;
+      package = pkgs.jdk23;
+    };
+    fzf = {
       enable = true;
     };
   };
@@ -133,7 +143,6 @@ in
     # Setting this to fix issue with man pages locale.
     LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
   };
-
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

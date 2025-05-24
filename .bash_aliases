@@ -2,6 +2,14 @@ is_bin_in_path() {
     builtin type -P "$1" &> /dev/null
 }
 
+update_nix() {
+    cd ~/.config/home-manager
+    nix flake update
+    NIXPKGS_ALLOW_UNFREE=1 home-manager switch --impure --flake .
+    sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator $HOME/.nix-profile/bin/ghostty 50
+    cd -
+}
+
 # Allow system-specific aliases (e.g. work aliases)
 [ -s "$HOME/.bash_local_aliases" ] && \. "$HOME/.bash_local_aliases"
 
@@ -30,7 +38,9 @@ alias cljrepl='clj -Sdeps '\''{:deps {nrepl/nrepl {:mvn/version "1.0.0"} cider/c
     --middleware '\''["cider.nrepl/cider-middleware"]'\'' \
     --interactive'
 
-alias nix-update='cd ~/.config/home-manager && nix flake update && NIXPKGS_ALLOW_UNFREE=1 home-manager switch --impure --flake . && cd -'
+alias aka-edit='vim ~/.bash_aliases && . ~/.bash_aliases'
+
+alias nix-update='update_nix'
 alias nix-edit='vim  ~/.config/home-manager/home.nix'
 
 if is_bin_in_path eza
