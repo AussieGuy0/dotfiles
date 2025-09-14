@@ -41,14 +41,16 @@ in
     pkgs.clojure
     pkgs.clojure-lsp
     pkgs.clj-kondo
+    pkgs.cmake
+    pkgs.deno
     pkgs.libclang
     pkgs.gcc
-    pkgs.cmake
     pkgs.go
+    pkgs.sqlite
     pkgs.maven
     pkgs.nodejs_20
+    pkgs.uv
     pkgs.yarn
-    pkgs.sqlite
 
     # CLI
     (nixGLwrap pkgs.ghostty)
@@ -57,6 +59,7 @@ in
     pkgs.fd
     pkgs.flyctl
     pkgs.git
+    pkgs.openssh
     pkgs.llm
     pkgs.xclip
     pkgs.zellij
@@ -68,7 +71,10 @@ in
     pkgs.vscode
 
     # Other
+    pkgs._1password-cli
+    pkgs._1password-gui
     (nixGLwrap pkgs.anki)
+    pkgs.bubblewrap
     pkgs.copyq
     pkgs.discord
     pkgs.emote

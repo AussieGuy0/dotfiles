@@ -1,13 +1,4 @@
 {
-  "languageserver": {
-    "nix": {
-      "command": "rnix-lsp",
-      "filetypes": [
-        "nix"
-      ]
-    }
-  },
-  "svelte.enable-ts-plugin": true,
-  "diagnostic.displayByAle": true,
-  "coc.preferences.formatOnSaveFiletypes":  ["*"]
+    "diagnostic.displayByAle": true,
+    "coc.preferences.formatOnSave": true
 }
