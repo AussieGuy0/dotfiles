@@ -7,6 +7,7 @@ update_nix() {
     nix flake update
     NIXPKGS_ALLOW_UNFREE=1 home-manager switch --impure --flake .
     sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator $HOME/.nix-profile/bin/ghostty 50
+    nix-collect-garbage -d
     cd -
 }
 

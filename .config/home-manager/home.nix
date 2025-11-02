@@ -60,12 +60,16 @@ in
     pkgs.flyctl
     pkgs.git
     pkgs.openssh
-    pkgs.llm
     pkgs.xclip
     pkgs.zellij
 
-    # Editors
+    # AI
     pkgs.code-cursor
+    pkgs.claude-code
+    pkgs.cursor-cli
+    pkgs.llm
+
+    # Editors
     pkgs.jetbrains-toolbox
     pkgs.neovim
     pkgs.vscode
@@ -125,7 +129,7 @@ in
     };
     java = {
       enable = true;
-      package = pkgs.jdk23;
+      package = pkgs.jdk25;
     };
     fzf = {
       enable = true;
