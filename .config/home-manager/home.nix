@@ -69,6 +69,10 @@ in
     pkgs.cursor-cli
     pkgs.llm
 
+    # WM
+    pkgs.i3
+    pkgs.j4-dmenu-desktop
+
     # Editors
     pkgs.jetbrains-toolbox
     pkgs.neovim
@@ -79,10 +83,10 @@ in
     pkgs._1password-gui
     (nixGLwrap pkgs.anki)
     pkgs.bubblewrap
+    pkgs.chromium
     pkgs.copyq
     pkgs.discord
     pkgs.emote
-    pkgs.exercism
     pkgs.firefox
     pkgs.flameshot
     pkgs.obsidian
