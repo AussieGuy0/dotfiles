@@ -28,6 +28,7 @@ alias g='git'
 alias gp='git push'
 alias gd='git diff'
 alias gds='git diff --staged'
+alias gro='git reset --hard @{u}' # Reset local branch to match remote
 
 alias fly='flyctl'
 
