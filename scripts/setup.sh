@@ -22,18 +22,6 @@ then
     nix-channel --update
     echo "First run of home manager, this may take a while!"
     nix-update
-
-    # https://regolith-desktop.com/docs/using-regolith/install/
-    echo "Installing regolith"
-    wget -qO - https://regolith-desktop.org/regolith.key | \
-gpg --dearmor | sudo tee /usr/share/keyrings/regolith-archive-keyring.gpg > /dev/null
-    echo deb "[arch=amd64 signed-by=/usr/share/keyrings/regolith-archive-keyring.gpg] \
-https://regolith-desktop.org/release-3_2-ubuntu-noble-amd64 noble main" | \
-sudo tee /etc/apt/sources.list.d/regolith.list
-    sudo apt update
-    sudo apt install regolith-desktop regolith-session-flashback regolith-look-lascaille
-    echo "Regolith installled - relogin to see it"
-
 fi
 
 # Setup vim
@@ -54,12 +42,12 @@ if [ ! -f "$HOME/.gitconfig" ]; then
         email=$EMAIL
     fi
     if [ -z "$GH_USERNAME" ]; then
-        read -rp "Enter your github username: " email
+        read -rp "Enter your github username: " gh_username
     else
         gh_username=$GH_USERNAME
     fi
 
-    cp .gitconfig.template "$HOME/.gitconfig"
+    cp .gitconfig.example "$HOME/.gitconfig"
     {
         echo "\n[user]" -e
         echo "\temail = $email" -e
