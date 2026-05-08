@@ -1,0 +1,11 @@
+[tools]
+node = "20"
+go = "latest"
+java = "openjdk-25"
+deno = "latest"
+rust = "latest"
+maven = "latest"
+uv = "latest"
+eza = "latest"
+zellij = "latest"
+flyctl = "latest"
