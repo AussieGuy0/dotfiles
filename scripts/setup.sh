@@ -16,8 +16,8 @@ if [ "$machine" = "Linux" ]; then
     echo "==> Installing apt packages"
     sudo apt update
     sudo apt install -y \
-        curl git openssh-client xclip bubblewrap \
-        cmake gcc libclang-dev sqlite3 \
+        curl git openssh-client xclip \
+        gcc sqlite3 \
         fd-find \
         fzf \
         i3 j4-dmenu-desktop \
@@ -46,24 +46,22 @@ if [ "$machine" = "Linux" ]; then
     echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/amd64 stable main' | sudo tee /etc/apt/sources.list.d/1password.list
     sudo apt update && sudo apt install -y 1password 1password-cli
 
-    echo "==> Installing VS Code"
-    curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft-archive-keyring.gpg
-    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/vscode stable main" | sudo tee /etc/apt/sources.list.d/vscode.list
-    sudo apt update && sudo apt install -y code
+    echo "==> Installing Spotify"
+    sudo snap install spotify
+
+    echo "==> Installing OBS Studio"
+    sudo flatpak install -y flathub com.obsproject.Studio
 
     echo "==> Installing Claude Code"
     curl -fsSL https://claude.ai/install.sh | bash
 
     echo ""
     echo "==> The following apps should be installed manually:"
-    echo "    - Discord:          https://discord.com/download"
-    echo "    - Spotify:          sudo snap install spotify"
-    echo "    - Obsidian:         https://obsidian.md/download"
-    echo "    - Anki:             https://apps.ankiweb.net"
-    echo "    - OBS Studio:       sudo flatpak install flathub com.obsproject.Studio"
+    echo "    - Discord:           https://discord.com/download"
+    echo "    - Obsidian:          https://obsidian.md/download"
+    echo "    - Anki:              https://apps.ankiweb.net"
     echo "    - JetBrains Toolbox: https://www.jetbrains.com/toolbox-app"
-    echo "    - Cursor:           https://www.cursor.com/downloads"
-    echo "    - Emote:            sudo snap install emote"
+    echo "    - Cursor:            https://www.cursor.com/downloads"
 fi
 
 # Setup vim
