@@ -22,16 +22,24 @@ gho checkout -f master
 ./scripts/setup.sh
 ```
 
-### A note about Nix
-I use nix home-manager to manage my system.
-The above commands *should* set up nix in the right state.
-If not, follow the below instructions:
+## Package management
 
-1. Install Nix (https://nixos.org/download#nix-install-linux)
-2. Install Home Manager
-   (https://nix-community.github.io/home-manager/index.html#sec-install-standalone)
-3. Run `home-manager switch`
+- **Language runtimes** (node, go, rust, java, deno, etc.) are managed by [mise](https://mise.jdx.dev/) via `~/.config/mise/config.toml`
+- **System packages** are managed by apt
+- **CLI tools** (eza, zellij) are installed via cargo
 
+### Updating
+
+```sh
+mise-update   # upgrade mise-managed tools
+sudo apt upgrade
+```
+
+### Editing mise tools
+
+```sh
+mise-edit   # opens ~/.config/mise/config.toml
+```
 
 ## Adding new files
 ```sh
