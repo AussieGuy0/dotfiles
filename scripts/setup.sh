@@ -18,8 +18,6 @@ if [ "$machine" = "Linux" ]; then
     sudo apt install -y \
         curl git openssh-client xclip \
         gcc sqlite3 \
-        fd-find \
-        fzf \
         i3 j4-dmenu-desktop \
         firefox vlc flameshot copyq \
 
@@ -30,31 +28,16 @@ if [ "$machine" = "Linux" ]; then
     echo "==> Installing language runtimes via mise"
     mise install
 
-    echo "==> Installing Rust-based CLI tools via cargo"
-    cargo install eza zellij
-
-    echo "==> Installing flyctl"
-    curl -L https://fly.io/install.sh | sh
-
-    echo "==> Installing ghostty"
-    # Install ghostty from their Ubuntu package
-    # See https://ghostty.org/docs/install/binary
-    sudo apt install -y ghostty || echo "ghostty not in apt - install manually from https://ghostty.org/docs/install/binary"
-
-    echo "==> Installing 1Password"
-    # https://support.1password.com/install-linux/#debian-or-ubuntu
-
-    echo "==> Installing Spotify"
+    echo "==> Installing snaps"
     sudo snap install spotify
-
-    echo "==> Installing starship"
-    curl -sS https://starship.rs/install.sh | sh
+    sudo snap install ghostty --classic
 
     echo "==> Installing Claude Code"
     curl -fsSL https://claude.ai/install.sh | bash
 
     echo ""
     echo "==> The following apps should be installed manually:"
+    echo "    - 1password:         https://support.1password.com/install-linux/#debian-or-ubuntu"
     echo "    - Discord:           https://discord.com/download"
     echo "    - Obsidian:          https://obsidian.md/download"
     echo "    - Anki:              https://apps.ankiweb.net"
