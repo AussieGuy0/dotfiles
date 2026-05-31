@@ -22,7 +22,6 @@ if [ "$machine" = "Linux" ]; then
         fzf \
         i3 j4-dmenu-desktop \
         firefox vlc flameshot copyq \
-        clojure
 
     echo "==> Installing mise"
     curl https://mise.run | sh
@@ -52,22 +51,8 @@ if [ "$machine" = "Linux" ]; then
     echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/vscode stable main" | sudo tee /etc/apt/sources.list.d/vscode.list
     sudo apt update && sudo apt install -y code
 
-    echo "==> Installing npm globals"
-    npm install -g yarn
-    npm install -g @anthropic-ai/claude-code
-
-    echo "==> Installing uv tools"
-    uv tool install llm
-
-    echo "==> Installing clojure-lsp"
-    CLOJURE_LSP_VERSION=$(curl -s https://api.github.com/repos/clojure-lsp/clojure-lsp/releases/latest | grep '"tag_name"' | cut -d'"' -f4)
-    curl -sL "https://github.com/clojure-lsp/clojure-lsp/releases/download/${CLOJURE_LSP_VERSION}/clojure-lsp-native-linux-amd64.zip" -o /tmp/clojure-lsp.zip
-    unzip -o /tmp/clojure-lsp.zip -d /tmp && sudo mv /tmp/clojure-lsp /usr/local/bin/clojure-lsp
-
-    echo "==> Installing clj-kondo"
-    CLJ_KONDO_VERSION=$(curl -s https://api.github.com/repos/clj-kondo/clj-kondo/releases/latest | grep '"tag_name"' | cut -d'"' -f4)
-    curl -sL "https://github.com/clj-kondo/clj-kondo/releases/download/${CLJ_KONDO_VERSION}/clj-kondo-${CLJ_KONDO_VERSION#v}-linux-amd64.zip" -o /tmp/clj-kondo.zip
-    unzip -o /tmp/clj-kondo.zip -d /tmp && sudo mv /tmp/clj-kondo /usr/local/bin/clj-kondo
+    echo "==> Installing Claude Code"
+    curl -fsSL https://claude.ai/install.sh | bash
 
     echo ""
     echo "==> The following apps should be installed manually:"
