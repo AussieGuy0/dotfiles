@@ -42,15 +42,10 @@ if [ "$machine" = "Linux" ]; then
     sudo apt install -y ghostty || echo "ghostty not in apt - install manually from https://ghostty.org/docs/install/binary"
 
     echo "==> Installing 1Password"
-    curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
-    echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/amd64 stable main' | sudo tee /etc/apt/sources.list.d/1password.list
-    sudo apt update && sudo apt install -y 1password 1password-cli
+    # https://support.1password.com/install-linux/#debian-or-ubuntu
 
     echo "==> Installing Spotify"
     sudo snap install spotify
-
-    echo "==> Installing OBS Studio"
-    sudo flatpak install -y flathub com.obsproject.Studio
 
     echo "==> Installing starship"
     curl -sS https://starship.rs/install.sh | sh
