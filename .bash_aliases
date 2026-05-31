@@ -2,15 +2,6 @@ is_bin_in_path() {
     builtin type -P "$1" &> /dev/null
 }
 
-# mise activation
-eval "$(~/.local/bin/mise activate bash 2>/dev/null || true)"
-
-# Environment
-export EDITOR="vim"
-export BROWSER="firefox"
-export TERMINAL="ghostty"
-export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.fly/bin:$PATH"
-
 # Allow system-specific aliases (e.g. work aliases)
 [ -s "$HOME/.bash_local_aliases" ] && \. "$HOME/.bash_local_aliases"
 

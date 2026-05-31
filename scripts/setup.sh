@@ -52,6 +52,9 @@ if [ "$machine" = "Linux" ]; then
     echo "==> Installing OBS Studio"
     sudo flatpak install -y flathub com.obsproject.Studio
 
+    echo "==> Installing starship"
+    curl -sS https://starship.rs/install.sh | sh
+
     echo "==> Installing Claude Code"
     curl -fsSL https://claude.ai/install.sh | bash
 
