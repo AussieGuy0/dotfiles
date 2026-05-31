@@ -1,8 +1,17 @@
 [tools]
-# Language runtimes & build tools
+# Language runtimes
 node = "20"
 go = "latest"
 rust = "latest"
 java = "openjdk-25"
 deno = "latest"
 uv = "latest"
+
+# Tools
+1password = "latest"
+eza = "latest"
+fzf = "latest"
+gh = "latest"
+ripgrep = "latest"
+starship = "latest"
+zellij = "latest"
