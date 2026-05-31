@@ -1,0 +1,8 @@
+[tools]
+# Language runtimes & build tools
+node = "20"
+go = "latest"
+rust = "latest"
+java = "openjdk-25"
+deno = "latest"
+uv = "latest"
