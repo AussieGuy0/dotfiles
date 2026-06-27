@@ -37,3 +37,7 @@ fi
 if command -v starship >/dev/null 2>&1; then
     eval "$(starship init bash)"
 fi
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
